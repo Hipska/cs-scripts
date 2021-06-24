@@ -43,9 +43,11 @@ def db_to_chimp():
         else:
             user_details = PLEKJES.find_one({'owner': email})
             
+            # Is user_details filled? No => there is no plekje for this email, search matches instead
             if not user_details:
                 user_details = MATCHES.find_one({'email': email})
             
+            # If there is no first and last name, ignore this row
             if not user_details['firstname'] == "" and not user_details['lastname'] == "":
                 try:
                     mailchimp.lists.add_list_member(audienceID, {
