@@ -53,7 +53,9 @@ Retrieves all unique email addresses from both matches and plekjes from the data
 Returns nothing, but will print out these statistics:
 
 ```
-
+Encountered 0 new subscribers and added them to mailchimp
+Encountered 312 subscribers that were already in the database
+Encountered 0 errors
 ```
 
 ### Mailchimp to db
