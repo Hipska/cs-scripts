@@ -29,3 +29,23 @@ mailchimp csv export: https://docs.google.com/spreadsheets/d/1ArDqAQuEE0wLu1q6Ly
 
 - user can unsubscribe
 - manually added -> clean duplicates
+
+## How-To-Run
+
+### tags
+
+Returns all unique tags present in mailchimp
+
+- `python3 tags.py`
+
+### DB to Mailchimp
+
+Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp
+
+- `python3 db_to_chimp.py
+
+### Mailchimp to db
+
+Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates and adds unknown ones to the database.
+
+- `python3 chimp_to_db.py`

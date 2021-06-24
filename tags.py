@@ -21,3 +21,7 @@ def get_tags():
                 tags.add(tag['name'])
 
     return tags
+
+
+if __name__ == '__main__':
+    print(get_tags())
