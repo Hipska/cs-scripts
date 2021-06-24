@@ -82,13 +82,11 @@ def chimp_to_db():
                 duplicates += 1
                 continue
 
-            tag_names = [tag['name'] for tag in member['tags']]
-
             EMAILS.insert_one({
                 'email': member['email_address'],
                 'first_name': member['merge_fields']['FNAME'],
                 'last_name': member['merge_fields']['LNAME'],
-                'tags': tag_names
+                'tags': [tag['name'] for tag in member['tags']]
             })
             new_addresses += 1
         
