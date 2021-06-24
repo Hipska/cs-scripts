@@ -48,6 +48,6 @@ Retrieves all unique email addresses from both matches and plekjes from the data
 
 ### Mailchimp to db
 
-Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates and adds unknown ones to the database.
+Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates, adds unknown ones to the database and updates ones that have changes.
 
 - `python3 chimp_to_db.py`
