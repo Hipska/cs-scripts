@@ -42,7 +42,7 @@ Returns all unique tags present in mailchimp
 
 Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp
 
-- `python3 db_to_chimp.py
+- `python3 db_to_chimp.py`
 
 ### Mailchimp to db
 
