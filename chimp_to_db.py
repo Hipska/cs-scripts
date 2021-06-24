@@ -73,7 +73,7 @@ def chimp_to_db():
             new_addresses += 1
         
     print(f"Encountered {duplicates} emails that were already stored and had no changes")
-    print(f"Encountered {updated_addresses} documents that had changes, updated them")
+    print(f"Encountered {updated_addresses} emails that had changes, updated them")
     print(f"Encountered {new_addresses} new emails, added them")
 
 if __name__ == '__main__':

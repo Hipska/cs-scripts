@@ -42,14 +42,30 @@ Returns all unique tags present in mailchimp
 
 - `python3 tags.py`
 
+Returns a set which contains all unique tags
+
 ### DB to Mailchimp
 
 Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp
 
 - `python3 db_to_chimp.py`
 
+Returns nothing, but will print out these statistics:
+
+```
+
+```
+
 ### Mailchimp to db
 
 Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates, adds unknown ones to the database and updates ones that have changes.
 
 - `python3 chimp_to_db.py`
+
+Returns nothing, but will print out these statistics:
+
+```
+Encountered 303 emails that were already stored and had no changes
+Encountered 0 emails that had changes, updated them
+Encountered 0 new emails, added them
+```
