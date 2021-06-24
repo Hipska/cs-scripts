@@ -4,8 +4,6 @@ from mailchimp_marketing.api_client import ApiClientError
 import pymongo
 from datetime import datetime
 
-DEBUG = True
-
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
 db = client['circuitsortie']
 PLEKJES = db['plekjes']
@@ -22,14 +20,11 @@ mailchimp.set_config({
 def db_to_chimp():
     """Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp"""
     new_addresses = 0
+    duplicate_addresses = 0
     errors = 0
 
     all_emails = MATCHES.distinct('email') + PLEKJES.distinct('owner')
     unique_emails = set(all_emails)
-
-    if DEBUG:
-        print(f"Total amount of addresses: {len(all_emails)}")
-        print(f"Unique amount of addresses: {len(unique_emails)}")
 
     for email in unique_emails:
         if email == "":
@@ -38,13 +33,12 @@ def db_to_chimp():
         res = mailchimp.searchMembers.search(email)
 
         if len(res['exact_matches']['members']) > 0:
-            print(f"{email} is already in chimp")
-
             if len(res['exact_matches']['members']) > 1:
                 # theoretically impossible, mailchimp has duplicate prevention
                 print(f"{email} exists multiple times")
             
             # User already exists in chimp, continue because they are not of interest
+            duplicate_addresses += 1
             continue
 
         user_details = PLEKJES.find_one({'owner': email})
@@ -77,15 +71,13 @@ def db_to_chimp():
             })
 
             new_addresses += 1
-
-            if DEBUG:
-                print(f"Addded {email} to mailchimp")
                 
         except ApiClientError as error:
             print(f"ERROR: {email} throws error")
             errors += 1
     
-    print(f"Added {new_addresses} new subscribers to mailchimp")
+    print(f"Encountered {new_addresses} new subscribers and added them to mailchimp")
+    print(f"Encountered {duplicate_addresses} subscribers that were already in the database")
     print(f"Encountered {errors} errors")
 
 if __name__ == '__main__':
