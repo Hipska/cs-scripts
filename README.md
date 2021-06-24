@@ -34,6 +34,8 @@ mailchimp csv export: https://docs.google.com/spreadsheets/d/1ArDqAQuEE0wLu1q6Ly
 
 Firstly, go to `config.py` and specify the right credentials and audience ID.
 
+If you want to run everything in one go. Run `db_to_chimp.py` first, run `chimp_to_db.py` after that.
+
 ### tags
 
 Returns all unique tags present in mailchimp
