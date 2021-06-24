@@ -2,6 +2,7 @@ from config import mailchimpKEY, mailchimpPrefix, audienceID
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 import pymongo
+from datetime import datetime
 
 DEBUG = True
 
@@ -10,6 +11,7 @@ db = client['circuitsortie']
 PLEKJES = db['plekjes']
 MATCHES = db['matches']
 EMAILS = db['email']
+AUDIT = db['audit']
 
 mailchimp = Client()
 mailchimp.set_config({
@@ -50,13 +52,22 @@ def db_to_chimp():
             # If there is no first and last name, ignore this row
             if not user_details['firstname'] == "" and not user_details['lastname'] == "":
                 try:
-                    mailchimp.lists.add_list_member(audienceID, {
+                    payload = {
                         "email_address": email,
                         "merge_fields": {
                             "FNAME": user_details['firstname'],
                             "LNAME": user_details['lastname'],
                         },
                         "status": "subscribed"
+                    }
+
+                    mailchimp.lists.add_list_member(audienceID, payload)
+
+                    # Log this request for further audit
+                    AUDIT.insert_one({
+                        'target': 'mailchimp',
+                        'payload': payload,
+                        'createdAt': datetime.now()
                     })
 
                     new_addresses += 1
@@ -82,12 +93,22 @@ def chimp_to_db():
                 duplicates += 1
                 continue
 
-            EMAILS.insert_one({
+            payload = {
                 'email': member['email_address'],
                 'first_name': member['merge_fields']['FNAME'],
                 'last_name': member['merge_fields']['LNAME'],
                 'tags': [tag['name'] for tag in member['tags']]
+            }
+
+            EMAILS.insert_one(payload)
+
+            # Log this request for further audit
+            AUDIT.insert_one({
+                'target': 'mongo',
+                'payload': payload,
+                'createdAt': datetime.now()
             })
+
             new_addresses += 1
         
     print(f"Encountered {duplicates} emails that were already stored")
