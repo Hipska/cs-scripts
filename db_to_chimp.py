@@ -3,6 +3,7 @@ from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 import pymongo
 from datetime import datetime
+from mail import mail
 
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
 db = client['circuitsortie']
@@ -79,6 +80,9 @@ def db_to_chimp():
     print(f"Encountered {new_addresses} new subscribers and added them to mailchimp")
     print(f"Encountered {duplicate_addresses} subscribers that were already in the database")
     print(f"Encountered {errors} errors")
+
+    mail('timothy@webfaster.com', 'timothy@webfaster.com', 'Circuit Sortie Mailchimp Sync', f'<h1>Circuit Sortie DB syncing to Mailchimp</h1><ul><li>{new_addresses} addresses added to mailchimp</li><li>{duplicate_addresses} addresses already in the database</li><<li>{errors} rows with errors</li>/ul>')
+
 
 if __name__ == '__main__':
     db_to_chimp()
