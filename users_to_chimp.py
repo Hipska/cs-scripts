@@ -18,7 +18,7 @@ mailchimp.set_config({
     "server": mailchimpPrefix
 })
 
-def db_to_chimp():
+def users_to_chimp():
     """Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp"""
     new_addresses = 0
     duplicate_addresses = 0
@@ -81,8 +81,13 @@ def db_to_chimp():
     print(f"Encountered {duplicate_addresses} subscribers that were already in the database")
     print(f"Encountered {errors} errors")
 
-    mail('dries@webfaster.com', 'dries@webfaster.com', 'Circuit Sortie Mailchimp Sync', f'<h1>Circuit Sortie DB syncing to Mailchimp</h1><ul><li>{new_addresses} addresses added to mailchimp</li><li>{duplicate_addresses} addresses already in the database</li><li>{errors} rows with errors</li></ul>')
+    return {
+        'new': new_addresses,
+        'duplicate': duplicate_addresses,
+        'errors': errors
+    }
+
 
 
 if __name__ == '__main__':
-    db_to_chimp()
+    users_to_chimp()

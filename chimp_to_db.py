@@ -88,8 +88,13 @@ def chimp_to_db(amount):
         
     print(f"Encountered {duplicates} emails that were already stored and had no changes")
     print(f"Encountered {updated_addresses} emails that had changes, updated them")
-    print(f"Encountered {new_addresses} new emails, added them"),
-    mail('dries@webfaster.com', 'dries@webfaster.com', 'Circuit Sortie Mailchimp Sync', f'<h1>Circuit Sortie Mailchimp syncing with email collection</h1><ul><li>{duplicates} addresses without changes</li><li>{updated_addresses} addresses with changes</li><li>{new_addresses} new addresses</li></ul>')
+    print(f"Encountered {new_addresses} new emails, added them")
+
+    return {
+        'new': duplicates,
+        'updated': updated_addresses,
+        'unchanged': duplicates
+    }
 
 if __name__ == '__main__':
     chimp_to_db(10000)
