@@ -44,33 +44,11 @@ Returns all unique tags present in mailchimp
 
 Returns a set which contains all unique tags
 
-### DB to Mailchimp
+### Cross-validate
 
-Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp
+Cross-validates Mailchimp and database
 
-- `python3 db_to_chimp.py`
-
-Returns nothing, but will print out these statistics:
-
-```
-Encountered 0 new subscribers and added them to mailchimp
-Encountered 312 subscribers that were already in the database
-Encountered 0 errors
-```
-
-### Mailchimp to db
-
-Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates, adds unknown ones to the database and updates ones that have changes.
-
-- `python3 chimp_to_db.py`
-
-Returns nothing, but will print out these statistics:
-
-```
-Encountered 303 emails that were already stored and had no changes
-Encountered 0 emails that had changes, updated them
-Encountered 0 new emails, added them
-```
+- `python3 cross_validate.py`
 
 ## Notes
 
