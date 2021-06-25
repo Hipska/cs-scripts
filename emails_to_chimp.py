@@ -19,6 +19,7 @@ mailchimp.set_config({
 })
 
 def emails_to_chimp():
+    """Gets all documents from the emails collection and checks if they are all present in Mailchimp."""
     all_emails = EMAILS.find()
 
     duplicate_addresses = 0

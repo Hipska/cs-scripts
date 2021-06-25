@@ -19,7 +19,7 @@ mailchimp.set_config({
 })
 
 def users_to_chimp():
-    """Retrieves all unique email addresses from both matches and plekjes from the database, compares them with mailchimp and adds new unique ones to mailchimp"""
+    """Gets all unique email addresses from both matches and plekjes from the database, compares them with Mailchimp and adds new unique ones to mailchimp"""
     new_addresses = 0
     duplicate_addresses = 0
     errors = 0

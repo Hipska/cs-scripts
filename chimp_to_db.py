@@ -18,7 +18,7 @@ mailchimp.set_config({
 })
 
 def chimp_to_db(amount):
-    """Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates and adds unknown ones to the database."""
+    """Retrieves all email addresses from mailchimp and compares them to the email database. Ignores duplicates, adds unknown ones to the database and updates existing ones that have changes."""
     duplicates = 0
     new_addresses = 0
     updated_addresses = 0
