@@ -71,3 +71,22 @@ Encountered 303 emails that were already stored and had no changes
 Encountered 0 emails that had changes, updated them
 Encountered 0 new emails, added them
 ```
+
+## Notes
+
+- Wie zijn contacts in CSV maar niet in db (400)
+- Backup maken mailchimp to csv
+
+- Volledige flow simuleren in test mailchimp
+
+## mailen naar luc
+
+- wie zijn contacten
+- verder verloop
+
+## flow test
+
+- nieuw contact in mailchimp
+- na sync in admin dash
+- unsubben in mailchimp
+- na sync niet meer subbed in db

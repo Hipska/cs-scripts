@@ -47,9 +47,9 @@ def db_to_chimp():
         # Is user_details filled? No => there is no plekje for this email, search matches instead
         if not user_details:
             user_details = MATCHES.find_one({'email': email})
-        
+     
         # If there is no first and last name, ignore this row
-        if not user_details['firstname'] == "" and not user_details['lastname'] == "":
+        if user_details['firstname'] == "" and user_details['lastname'] == "":
             continue
 
         try:
@@ -81,7 +81,7 @@ def db_to_chimp():
     print(f"Encountered {duplicate_addresses} subscribers that were already in the database")
     print(f"Encountered {errors} errors")
 
-    mail('timothy@webfaster.com', 'timothy@webfaster.com', 'Circuit Sortie Mailchimp Sync', f'<h1>Circuit Sortie DB syncing to Mailchimp</h1><ul><li>{new_addresses} addresses added to mailchimp</li><li>{duplicate_addresses} addresses already in the database</li><<li>{errors} rows with errors</li>/ul>')
+    mail('dries@webfaster.com', 'dries@webfaster.com', 'Circuit Sortie Mailchimp Sync', f'<h1>Circuit Sortie DB syncing to Mailchimp</h1><ul><li>{new_addresses} addresses added to mailchimp</li><li>{duplicate_addresses} addresses already in the database</li><li>{errors} rows with errors</li></ul>')
 
 
 if __name__ == '__main__':
