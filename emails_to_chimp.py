@@ -2,8 +2,6 @@ from config import mailchimpKEY, mailchimpPrefix, audienceID
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 import pymongo
-from datetime import datetime
-from mail import mail
 
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
 db = client['circuitsortie']
