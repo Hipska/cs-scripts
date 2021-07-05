@@ -58,7 +58,8 @@ def users_to_chimp():
                     "FNAME": user_details['firstname'],
                     "LNAME": user_details['lastname'],
                 },
-                "status": "subscribed"
+                "status": "subscribed",
+                "tags": ['plekjes & matches']
             }
 
             mailchimp.lists.add_list_member(audienceID, payload)
