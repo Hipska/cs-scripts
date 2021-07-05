@@ -1,8 +1,8 @@
-from os import read
+from config import mongoUrl
 import pymongo
 import csv
 
-client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
+client = pymongo.MongoClient(mongoUrl)
 db = client['circuitsortie']
 EMAILS = db['email']
 

@@ -1,9 +1,9 @@
-from config import mailchimpKEY, mailchimpPrefix, audienceID
+from config import mailchimpKEY, mailchimpPrefix, audienceID, mongoUrl
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 import pymongo
 
-client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
+client = pymongo.MongoClient(mongoUrl)
 db = client['circuitsortie']
 PLEKJES = db['plekjes']
 MATCHES = db['matches']
